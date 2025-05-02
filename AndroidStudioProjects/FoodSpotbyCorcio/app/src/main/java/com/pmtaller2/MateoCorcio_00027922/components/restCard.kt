@@ -20,12 +20,10 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
@@ -94,9 +92,6 @@ fun RestCard(
     }
 }
 
-
-
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DishCard(
@@ -160,158 +155,53 @@ fun DishCard(
     }
 }
 
-
-
-//@Preview(showBackground = true)
+@Preview(showBackground = true)
 @Composable
 fun RestCardPreview() {
-    Column(){
+    val sampleDishes = listOf(
+        Dish(id = 1, name = "Tacos al Pastor", description = "Tacos con carne de cerdo y piña", imageUrl = "https://www.example.com/taco.jpg"),
+        Dish(id = 2, name = "Enchiladas", description = "Enchiladas rojas con pollo", imageUrl = "https://www.example.com/enchilada.jpg")
+    )
 
-        val sampleRestaurants = listOf(
-            Restaurant(
-                id = 1,
-                name = "Pizza Planet",
-                description = "Las mejores pizzas del universo",
-                imageUrl = "https://example.com/pizza.jpg",
-                categories = listOf("Comida Rápida"),
-                menu = listOf()
-            ),
-            Restaurant(
-                id = 2,
-                name = "Burger Star",
-                description = "Hamburguesas galácticas",
-                imageUrl = "https://example.com/burger.jpg",
-                categories = listOf("Comida Rápida", "Americana"),
-                menu = listOf()
-            ),
-            Restaurant(
-                id = 3,
-                name = "Sushi Go",
-                description = "Sushi express",
-                imageUrl = "https://example.com/sushi.jpg",
-                categories = listOf("Comida R"),
-                menu = listOf()
-            )
+    val sampleRestaurants = listOf(
+        Restaurant(
+            id = 1,
+            name = "Restaurante Mexicano",
+            description = "Restaurante especializado en comida mexicana",
+            imageUrl = "https://www.example.com/restaurant.jpg",
+            categories = listOf("Mexicana"),
+            menu = sampleDishes
+        ),
+        Restaurant(
+            id = 2,
+            name = "Restaurante Italiano",
+            description = "Restaurante especializado en comida italiana",
+            imageUrl = "https://www.example.com/restaurant2.jpg",
+            categories = listOf("Italiana"),
+            menu = sampleDishes
         )
+    )
 
-        RestCard(categoryName = "Comida Rápida", restaurants = sampleRestaurants, onRestaurantClick = { selectedMenu, restaurantName ->})
+    Column(modifier = Modifier.padding(16.dp)) {
+        RestCard(
+            categoryName = "Mexicana",
+            restaurants = sampleRestaurants,
+            onRestaurantClick = { menu, name -> }
+        )
     }
 }
 
-@Preview( showBackground = true)
+
+@Preview(showBackground = true)
 @Composable
-fun DishCardView(){
-    Column(
-        modifier = Modifier.fillMaxWidth()
-    ){
-
-        RestCard(
-            categoryName = "Comida Rápida",
-            restaurants = listOf(
-                Restaurant(
-                    id = 1,
-                    name = "Pizza Planet",
-                    description = "Las mejores pizzas del universo",
-                    imageUrl = "https://example.com/pizza.jpg",
-                    categories = listOf( "Comida Rápida" ),
-                    menu = listOf(
-                        Dish(
-                            id = 1,
-                            name = "Pizza Pepperoni",
-                            description = "Clásica pizza con pepperoni y queso.",
-                            imageUrl = "https://example.com/pepperoni.jpg"),
-                        Dish(
-                            id = 2,
-                            name = "Pizza Margarita",
-                            description = "Pizza con tomate, mozzarella y albahaca.",
-                            imageUrl = "https://example.com/margarita.jpg")
-                    )
-                )
-            ),
-            onRestaurantClick = {
-                selectedMenu, restaurantName ->
-            }
-        )
-        RestCard(
-            categoryName = "Comida Rápida",
-            restaurants = listOf(
-                Restaurant(
-                    id = 2,
-                    name = "Pizza Planet",
-                    description = "Las mejores pizzas del universo",
-                    imageUrl = "https://example.com/pizza.jpg",
-                    categories = listOf( "Comida Rápida" ),
-                    menu = listOf(
-                        Dish(
-                            id = 1,
-                            name = "Pizza Pepperoni",
-                            description = "Clásica pizza con pepperoni y queso.",
-                            imageUrl = "https://example.com/pepperoni.jpg"),
-                        Dish(
-                            id = 2,
-                            name = "Pizza Margarita",
-                            description = "Pizza con tomate, mozzarella y albahaca.",
-                            imageUrl = "https://example.com/margarita.jpg")
-                    )
-                )
-            ),
-            onRestaurantClick = {
-                selectedMenu, restaurantName ->
-            }
-        )
-        RestCard(
-            categoryName = "Comida Rápida",
-            restaurants = listOf(
-                Restaurant(
-                    id = 3,
-                    name = "Pizza Planet",
-                    description = "Las mejores pizzas del universo",
-                    imageUrl = "https://example.com/pizza.jpg",
-                    categories = listOf( "Comida Rápida" ),
-                    menu = listOf(
-                        Dish(
-                            id = 1,
-                            name = "Pizza Pepperoni",
-                            description = "Clásica pizza con pepperoni y queso.",
-                            imageUrl = "https://example.com/pepperoni.jpg"),
-                        Dish(
-                            id = 2,
-                            name = "Pizza Margarita",
-                            description = "Pizza con tomate, mozzarella y albahaca.",
-                            imageUrl = "https://example.com/margarita.jpg")
-                    )
-                )
-            ),
-            onRestaurantClick = {
-                selectedMenu, restaurantName ->
-            }
-        )
-        RestCard(
-            categoryName = "Comida Rápida",
-            restaurants = listOf(
-                Restaurant(
-                    id = 1,
-                    name = "Pizza Planet",
-                    description = "Las mejores pizzas del universo",
-                    imageUrl = "https://example.com/pizza.jpg",
-                    categories = listOf( "Comida Rápida" ),
-                    menu = listOf(
-                        Dish(
-                            id = 1,
-                            name = "Pizza Pepperoni",
-                            description = "Clásica pizza con pepperoni y queso.",
-                            imageUrl = "https://example.com/pepperoni.jpg"),
-                        Dish(
-                            id = 2,
-                            name = "Pizza Margarita",
-                            description = "Pizza con tomate, mozzarella y albahaca.",
-                            imageUrl = "https://example.com/margarita.jpg")
-                    )
-                )
-            ),
-            onRestaurantClick = {
-                selectedMenu, restaurantName ->
-            }
-        )
-    }
+fun DishCardPreview() {
+    DishCard(
+        name = "Tacos al Pastor",
+        description = "Deliciosos tacos con carne de cerdo, piña, y salsa roja.",
+        imageUrl = "https://www.example.com/taco.jpg",
+        onAddToCart = { /* Acción al agregar al carrito */ }
+    )
 }
+
+
+

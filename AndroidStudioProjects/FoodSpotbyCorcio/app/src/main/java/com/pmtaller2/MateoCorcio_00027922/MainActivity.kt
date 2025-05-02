@@ -5,29 +5,15 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
 import com.pmtaller2.MateoCorcio_00027922.components.BottomNavBar
 import com.pmtaller2.MateoCorcio_00027922.models.Dish
-import com.pmtaller2.MateoCorcio_00027922.models.Restaurant
-import com.pmtaller2.MateoCorcio_00027922.models.restaurants
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.tooling.preview.Preview
 
 import com.pmtaller2.MateoCorcio_00027922.ui.theme.FoodSpotByCorcioTheme
@@ -50,7 +36,6 @@ fun MainScreen() {
     var selectedDishes by remember { mutableStateOf<List<Dish>>(emptyList()) }
     var restName by remember { mutableStateOf("") }
 
-    // Estado para las órdenes
     val orders = remember { mutableStateListOf<String>() }
 
     Scaffold(
@@ -75,12 +60,12 @@ fun MainScreen() {
                     restaurantName = restName,
                     onBack = { selectedItem = 0 },
                     addToCart = { dishName ->
-                        orders.add(dishName)  // Agregar el platillo al carrito
+                        orders.add(dishName)
                     }
                 )
                 2 -> OrdersView(
-                    orders = orders,  // Pasamos las órdenes a la vista de órdenes
-                    onSearch = { /* Aquí puedes manejar la búsqueda si quieres */ },
+                    orders = orders,
+                    onSearch = { },
                     onBack = { selectedItem = 0 }
                 )
             }

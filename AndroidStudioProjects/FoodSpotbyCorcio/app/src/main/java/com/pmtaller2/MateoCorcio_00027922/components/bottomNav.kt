@@ -12,6 +12,7 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
+import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun BottomNavBar(
@@ -39,3 +40,9 @@ fun BottomNavBar(
     }
 }
 
+@Preview(showBackground = true)
+@Composable
+fun BottomNavBarPreview() {
+    var selectedItem by remember { mutableStateOf(0) }
+    BottomNavBar(selectedItem = selectedItem, onItemSelected = { selectedItem = it })
+}
